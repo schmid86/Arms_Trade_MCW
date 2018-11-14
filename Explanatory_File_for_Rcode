@@ -1,6 +1,7 @@
 Explanatory File for ‘Network_Interdependencies_Thurner_et_al_2018.RData’
 
-This document describes the R-Code in ‘Network_Interdependencies_Thurner_et_al_2018.RData’ and how to replicate the results in ‘Network Interdependecies and the Evolution of the Arms Trade Network’, Thurner et al. 2018, JCR.
+This document describes the R-Code in ‘Network_Interdependencies_Thurner_et_al_2018.RData’ and how to replicate the results in 
+‘Network Interdependecies and the Evolution of the Arms Trade Network’, Thurner et al. 2018, JCR.
 
 Lines 1-18: Necessary R-packages
 Lines 19-723: preparing a matrix called ‘laenderliste’ (“country list” in german), which is necessary to merge all different data 
