@@ -1,0 +1,44 @@
+Explanatory File for ‘Network_Interdependencies_Thurner_et_al_2018.RData’
+
+This document describes the R-Code in ‘Network_Interdependencies_Thurner_et_al_2018.RData’ and how to replicate the results in ‘Network Interdependecies and the Evolution of the Arms Trade Network’, Thurner et al. 2018, JCR.
+
+Lines 1-18: Necessary R-packages
+Lines 19-723: preparing a matrix called ‘laenderliste’ (“country list” in german), which is necessary to merge all different data 
+              sets for the analysis.
+Lines 724-949: create a matrix EX where columns represent years from 1950-2013 and rows the actors in the network. EX[i,j]=1 means 
+               that country i did exist in year j, EX[i,j]=0 means that country i did not exist in year j. Smallest countries 
+               (listed in 1.2 in the Appendix) that were not considered in analysis have been muted out.
+Lines 950-1056: Reading in the SIPRI data
+Lines 1057-1090: create a list of 64 adjacency matrices (one for each year from 1950-2013) and read in the trade flow from country
+                 i to country j in year t into the right column and row of the right matrix.
+Lines 1091-1605: Read in data for the covariates of the Model, e.g. Alliance, Geographic Distance, etc.
+Lines 1606-1707: A help function that is necessary for the simulation. For a given time period ‘from – year’ it removes all 
+                 countries from the adjacency matrix that did not exist at year i, and returns the matrix from year “from+plus”, 
+                 e.g. amperiod2(from=1960,year=1965,plus=1,mode=1,tiv=2) creates an adjacency matrix for year 1960+1 based on 
+                 countries that existed in year 1965. A tie is defined if the trade was 2Mio TIV or more. The TERGM requires 
+                 networks on the same set of vertices.                
+                 Mode=1 returns MCW adjacency matrix. By changing the mode parameter the covariates can be cut into the right form 
+                 as well.
+  mod=1, MCW
+  mod=2, Defense Alliance
+  mod=6, polity IV
+  mod=25, path dependency
+  mod=8, military capability, CINC
+  mod=10, intrastate conflicts
+  mod=22 GDP
+  mod=23 capital distance
+The tiv parameter (default is tiv=1) allows to control the binarization of the network, e.g. if tiv=1, all ties with more or equal 
+1 (in million tiv) are taken as ties in the network, while all trades with less than 1 are neglected.
+
+Lines 1708-1732: Help function necessary for some figures. For a given year I it cuts out all countries that did not exist from 
+                 the adjacency matrix. It also binarizes according to the ‘tiv’ parameter.
+Lines 1733-1954: Estimation of the model parameters for the entire time period. Results are stored in the result matrix ReMa. 
+                 The function amperiod2() is being used to preprocess the data
+Lines 1955-2123: Plotting the results to get Figure 5
+Lines 2124-2177: Code for Figure 6
+Lines 2178-2467: Code for out-of-sample AUC
+Lines 2468-2513: Code for Figure 7
+Lines 2514-2689: Code for the remaining figures in the paper (Figures 1-4)
+Lines 2690-2756: Power-Law calculation as discussed on page 13
+Lines 2757-2793: Code for Table1
+Lines 2794–3166: Codes for Figures in the Appendix
